@@ -19,6 +19,28 @@ name = "qiskit2quafu"
 def qiskit2quafu(qc: QuantumCircuit, regName='iii', basis_gates=['cx', 'cy', 'cz', 'cp', 'u1', 'u2', 'u3', 'h', 'id', 'swap', 'cswap', 'p', 'rx', 'ry',
                                                                  'rz', 'x', 'y', 'z', 's', 'sdg', 't', 'tdg', 'sx', 'ccx', 'rxx', 'ryy', 'rzz'], optimization_level=0):
 
+    '''
+    Input:
+    qc: QuantumCircuit instance of Qiskit
+    regName (optional): Modified register name
+    basis_gates (optional): The set of gates supported by the quafu chip
+    optimization_level (optional): optimization level
+    
+    Output:
+    quafu_qc: The circuit instance of quafu
+    qc_merge: The converted qasm circuit in string form
+    -----------------------------------------------------
+    输入:
+    qc: qiskit的QuantumCircuit实例
+    regName (可选): 可调整寄存器名称
+    basis_gates (可选): quafu芯片支持的门集
+    optimization_level (可选): 优化等级
+    
+    输出:
+    quafu_qc: Quafu的电路实例
+    qc_merge: 字符串形式的转换后的qasm电路
+    '''
+
     def regMerge(qstring: str, regName=regName):
         regList = []
         t = qstring.splitlines()
@@ -103,8 +125,9 @@ def hamilton2quafu(i: list, reverse=True):
     '''
     对指定的哈密顿量生成测量电路,并与ansatz电路拼接
     输入格式: [ [ansatz:qiskitQuantumCircuit, H:string, coefficient:list] ]
-    [[ansatz1, H1, coefficientList1], [ansatz2, H2, coefficientList2], ...] 
+    [[ansatz1, H1, coefficientList1], [ansatz2, H2, coefficientList2], ...]
     例如: [ [ansatz, 'XYZ', [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0]] ]   
+    
     reverse: 默认为True, 根据个人习惯调整
     设置为True时: 哈密顿量字符串的左起第一个对应测量结果的左起第一位
     设置为False时: 哈密顿量字符串的左起第一个对应测量结果的右起第一位

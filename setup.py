@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='qiskit2quafu',
-    version='0.0.14',
+    version='0.0.15',
     packages=setuptools.find_packages(),
     url='https://github.com/ladium493/qiskit2quafu',
     license='MIT',
